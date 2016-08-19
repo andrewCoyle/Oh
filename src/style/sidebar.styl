@@ -8,7 +8,10 @@
   overflow hidden
 
   &.minimized
-    width 2%
+    width auto
+    .top-menu>*:not(.minimize),
+    .comment
+      display none
 
   .top-menu
     display flex
@@ -16,17 +19,3 @@
     justify-content space-between
     padding 10px
     border-bottom 1px solid #e2e2e2
-
-  .comments
-    .comment
-      padding 10px
-      border-bottom 1px solid #e2e2e2
-      .head
-        display flex
-        flex-flow row wrap
-        justify-content space-between
-        .number, .author, .operation
-          display flex
-      .body
-        .message
-          padding 10px 0
