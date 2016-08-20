@@ -5,48 +5,31 @@ import '../style/image.styl'
 export default class Image extends Component {
 
   static propTypes = {
-    tags: PropTypes.array
+    tags: PropTypes.array,
+    createTag: PropTypes.func
   }
 
   static defaultProps = {
-    tags: [
-      {
-        id: 1,
-        left: 100,
-        top: 100
-      },
-      {
-        id: 2,
-        left: 250,
-        top: 250
-      }
-    ]
+    tags: [],
+    createTag: () => {}
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      tags: this.props.tags
     }
   }
 
   _createTag = (e) => {
-    let tags = this.state.tags
-    const id = tags.length + 1
-    const element = {
-      id: id,
+    this.props.createTag({
+      id: this.props.tags.length + 1,
       left: e.pageX - 15,
-      top: e.pageY - 15
-    }
-    tags.push(element)
-
-    this.setState({
-      tags
+      top: e.pageY - 15,
     })
   }
 
   render() {
-    const { tags } = this.state
+    const { tags } = this.props
 
     return (
       <div className="image-wrapper" onClick={this._createTag}>
@@ -54,7 +37,7 @@ export default class Image extends Component {
           image
 
           {_.map(tags, (tag) =>
-            this.renderTag(tag)
+            !tag.isResolved && this.renderTag(tag)
           )}
 
         </div>

@@ -5,14 +5,14 @@ export default class Comment extends Component {
 
   static propTypes = {
     comment: PropTypes.object,
-    markResolved: PropTypes.func,
-    reply: PropTypes.func
+    resolveTag: PropTypes.func,
+    replyToComment: PropTypes.func
   }
 
   static defaultProps = {
     comment: {},
-    markResolved: () => {},
-    reply: () => {}
+    resolveTag: () => {},
+    replyToComment: () => {}
   }
 
   constructor(props) {
@@ -22,12 +22,12 @@ export default class Comment extends Component {
   }
 
   _markResolved = () => {
-    this.props.markResolved(this.props.comment.id)
+    this.props.resolveTag(this.props.comment.id)
   }
 
   _reply = (e) => {
     if (e.keyCode === 13 && e.target.value) {
-      this.props.reply(this.props.comment.id, e.target.value)
+      this.props.replyToComment(this.props.comment.id, e.target.value, 'Anonymous')
       this.refs.replyInput.value = ''
     }
   }
@@ -38,7 +38,7 @@ export default class Comment extends Component {
     return (
       <div className="comment">
         <div className="head">
-          <div className="number">{comment.id}</div>
+          <div className="id">{comment.id}</div>
           <div className="author">{comment.author}</div>
           <div className="operation">
             <label htmlFor="">Mark resolved</label>

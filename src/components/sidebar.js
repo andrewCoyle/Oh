@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import Comments from './comments'
 import '../style/sidebar.styl'
 
 export default class Sidebar extends Component {
@@ -35,7 +34,7 @@ export default class Sidebar extends Component {
           <button>{'X'}</button>
         </div>
 
-        <Comments/>
+        {this.props.children}
 
       </div>
     )
