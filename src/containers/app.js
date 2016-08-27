@@ -10,8 +10,21 @@ import { getTags, createTag, resolveTag, activateTag, replyToComment } from '../
 
 class App extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      fullscreen: false
+    }
+  }
+
   componentWillMount() {
     this.props.tagsActions.getTags()
+  }
+
+  _changeScreenMode = () => {
+    this.setState({
+      fullscreen: !this.state.fullscreen
+    })
   }
 
   render() {
@@ -24,9 +37,13 @@ class App extends Component {
           tags={tags}
           createTag={createTag}
           activateTag={activateTag}
+          fullscreen={this.state.fullscreen}
         />
 
-        <Sidebar>
+        <Sidebar
+          isMinimized={this.state.fullscreen}
+          changeScreenMode={this._changeScreenMode}
+        >
           <Comments
             comments={tags}
             resolveTag={resolveTag}

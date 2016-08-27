@@ -7,12 +7,14 @@ export default class Image extends Component {
 
   static propTypes = {
     tags: PropTypes.array,
+    fullscreen: PropTypes.bool,
     createTag: PropTypes.func,
     activateTag: PropTypes.func
   }
 
   static defaultProps = {
     tags: [],
+    fulscreen: false,
     createTag: () => {},
     activateTag: () => {}
   }
@@ -36,14 +38,14 @@ export default class Image extends Component {
   }
 
   render() {
-    const { tags } = this.props
+    const { tags, fullscreen } = this.props
 
     return (
-      <div className="image-wrapper" onClick={this._createTag}>
-        <div className="image">
+      <div className={classnames('image-wrapper', {fullscreen: this.props.fullscreen})}>
+        <div className="image" onClick={this._createTag}>
           image
 
-          {_.map(tags, (tag) =>
+          {!fullscreen && _.map(tags, (tag) =>
             !tag.isResolved && this.renderTag(tag)
           )}
 

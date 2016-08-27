@@ -1,8 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import '../theme/style/sidebar.styl'
 
 export default class Sidebar extends Component {
+
+  static propTypes = {
+    isMinimized: PropTypes.bool,
+    changeScreenMode: PropTypes.func,
+  }
+
+  static defaultProps = {
+    isMinimized: false,
+    changeScreenMode: () => {}
+  }
 
   constructor(props) {
     super(props)
@@ -12,13 +22,11 @@ export default class Sidebar extends Component {
   }
 
   _toggleSidebar = () => {
-    this.setState({
-      isMinimized: !this.state.isMinimized
-    })
+    this.props.changeScreenMode()
   }
 
   render() {
-    const { isMinimized } = this.state
+    const { isMinimized } = this.props
 
     return (
       <div className={classnames('sidebar', {

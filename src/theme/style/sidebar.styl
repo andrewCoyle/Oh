@@ -10,7 +10,22 @@
 
   &.minimized
     width auto
-    .top-menu>*:not(.toggle),
+    border none
+    background-color initial
+    .top-menu
+      border none
+      .inner
+        width auto
+        padding 0
+        .toggle
+          display block
+          position fixed
+          right 45px
+          top 7px
+        .share-wrapper, .close
+          display none
+      .donut, .image-name
+        display none
     .comment
       display none
 
