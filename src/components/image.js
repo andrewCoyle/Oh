@@ -26,11 +26,13 @@ export default class Image extends Component {
   }
 
   _createTag = (e) => {
-    this.props.createTag({
-      id: this.props.tags.length + 1,
-      left: e.pageX - 16,
-      top: e.pageY - 16,
-    })
+    if (!this.props.fullscreen) {
+      this.props.createTag({
+        id: this.props.tags.length + 1,
+        left: e.pageX - 16,
+        top: e.pageY - 16,
+      })
+    }
   }
 
   _activateTag = () => {
