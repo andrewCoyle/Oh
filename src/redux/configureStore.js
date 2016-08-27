@@ -15,6 +15,7 @@ export default function configureStore() {
         author: 'John Doe',
         message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         isResolved: false,
+        isActive: false,
         replies: [
           {
             id: 1,
@@ -30,6 +31,7 @@ export default function configureStore() {
         author: 'Sally',
         message: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
         isResolved: false,
+        isActive: false,
         replies: [
           {
             id: 1,

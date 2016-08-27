@@ -8,12 +8,14 @@ export default class Comments extends Component {
   static propTypes = {
     comments: PropTypes.array,
     resolveTag: PropTypes.func,
+    activateTag: PropTypes.func,
     replyToComment: PropTypes.func
   }
 
   static defaultProps = {
     comments: [],
     resolveTag: () => {},
+    activateTag: () => {},
     replyToComment: () => {}
   }
 
@@ -30,6 +32,7 @@ export default class Comments extends Component {
               key={item.id}
               comment={item}
               resolveTag={this.props.resolveTag}
+              activateTag={this.props.activateTag}
               replyToComment={this.props.replyToComment}
             />
         )}

@@ -1,17 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
+import classnames from 'classnames'
 
 export default class Comment extends Component {
 
   static propTypes = {
     comment: PropTypes.object,
     resolveTag: PropTypes.func,
+    activateTag: PropTypes.func,
     replyToComment: PropTypes.func
   }
 
   static defaultProps = {
     comment: {},
     resolveTag: () => {},
+    activateTag: () => {},
     replyToComment: () => {}
   }
 
@@ -25,6 +28,10 @@ export default class Comment extends Component {
     this.props.resolveTag(this.props.comment.id)
   }
 
+  _activateTag = () => {
+    this.props.activateTag(this.props.comment.id)
+  }
+
   _reply = (e) => {
     if (e.keyCode === 13 && e.target.value) {
       this.props.replyToComment(this.props.comment.id, e.target.value, 'Anonymous')
@@ -36,7 +43,7 @@ export default class Comment extends Component {
     const { comment } = this.props
 
     return (
-      <div className="comment">
+      <div className={classnames('comment', {active: comment.isActive})} onClick={this._activateTag}>
         <div className="head">
           <div className="id">{comment.id}</div>
           <div className="author">{comment.author}</div>

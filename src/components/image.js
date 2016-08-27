@@ -1,17 +1,20 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
+import classnames from 'classnames'
 import '../theme/style/image.styl'
 
 export default class Image extends Component {
 
   static propTypes = {
     tags: PropTypes.array,
-    createTag: PropTypes.func
+    createTag: PropTypes.func,
+    activateTag: PropTypes.func
   }
 
   static defaultProps = {
     tags: [],
-    createTag: () => {}
+    createTag: () => {},
+    activateTag: () => {}
   }
 
   constructor(props) {
@@ -26,6 +29,10 @@ export default class Image extends Component {
       left: e.pageX - 16,
       top: e.pageY - 16,
     })
+  }
+
+  _activateTag = () => {
+    this.props.activateTag()
   }
 
   render() {
@@ -48,7 +55,7 @@ export default class Image extends Component {
   renderTag(tag) {
     return (
       <div
-        className="tag"
+        className={classnames('tag', {'active': tag.isActive})}
         key={tag.id}
         style={{
           left: tag.left,

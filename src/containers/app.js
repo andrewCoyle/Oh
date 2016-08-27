@@ -6,7 +6,7 @@ import '../theme/style/app.styl'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getTags, createTag, resolveTag, replyToComment } from '../redux/modules/tags'
+import { getTags, createTag, resolveTag, activateTag, replyToComment } from '../redux/modules/tags'
 
 class App extends Component {
 
@@ -16,19 +16,21 @@ class App extends Component {
 
   render() {
     const { tags } = this.props
-    const { createTag, resolveTag, replyToComment } = this.props.tagsActions
+    const { createTag, resolveTag, activateTag, replyToComment } = this.props.tagsActions
 
     return (
       <div className="app">
         <Image
           tags={tags}
           createTag={createTag}
+          activateTag={activateTag}
         />
 
         <Sidebar>
           <Comments
             comments={tags}
             resolveTag={resolveTag}
+            activateTag={activateTag}
             replyToComment={replyToComment}
           />
         </Sidebar>
@@ -45,7 +47,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    tagsActions: bindActionCreators({getTags, createTag, resolveTag, replyToComment}, dispatch)
+    tagsActions: bindActionCreators({getTags, createTag, resolveTag, activateTag, replyToComment}, dispatch)
   }
 }
 

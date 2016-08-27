@@ -5,6 +5,7 @@ const GET_TAGS_REQUEST = 'GET_TAGS_REQUEST'
 const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS'
 const CREATE_TAG_REQUEST = 'CREATE_TAG_REQUEST'
 const RESOLVE_TAG_REQUEST = 'RESOLVE_TAG_REQUEST'
+const ACTIVATE_TAG = 'ACTIVATE_TAG'
 const REPLY_COMMENT_TAG_REQUEST = 'REPLY_COMMENT_TAG_REQUEST'
 
 //initial
@@ -32,6 +33,7 @@ export function createTag(tag) {
         author: 'Anonymous',
         message: 'Default message.',
         isResolved: false,
+        isActive: false,
         replies: []
       }
     })
@@ -42,6 +44,17 @@ export function resolveTag(id) {
   return (dispatch) => {
     dispatch({
       type: RESOLVE_TAG_REQUEST,
+      response: {
+        id: id
+      }
+    })
+  }
+}
+
+export function activateTag(id) {
+  return (dispatch) => {
+    dispatch({
+      type: ACTIVATE_TAG,
       response: {
         id: id
       }
@@ -77,6 +90,12 @@ export default function reducer(state = initialState, action) {
     case RESOLVE_TAG_REQUEST: {
       const index = state.findIndex((item) => item.get('id') === action.response.id)
       return state.update(index, (item) => item.set('isResolved', true))
+    }
+
+    case ACTIVATE_TAG: {
+      const index = state.findIndex((item) => item.get('id') === action.response.id)
+      return state.map((tag) => tag.setIn(['isActive'], false))
+                  .update(index, (item) => item.set('isActive', true))
     }
 
     case REPLY_COMMENT_TAG_REQUEST: {
