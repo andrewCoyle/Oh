@@ -1,43 +1,67 @@
 .comments
   .comment
-    padding 10px
+    padding 10px 10px 25px 10px
     border-bottom 1px solid #e2e2e2
     .head
       display flex
       flex-flow row wrap
-      justify-content space-between
+      justify-content flex-start
 
       .id
         display flex
         justify-content center
-        width 30px
-        height 30px
-        border-radius 15px
+        width 32px
+        height 32px
+        border-radius 16px
         background #6F778C
-        line-height 30px
+        line-height 32px
         color #fff
+        font-family 'Lato-Black', sans-serif
+        font-size 12px
+        cursor pointer
       .author
         display flex
-        font-weight bold
+        padding 0 10px
+        width 45%
+        line-height 32px
+        font-family 'Lato Black', sans-serif
+        font-weight 900
+        font-size 14px
       .operation
-        Adisplay flex
+        display flex
+        flex-flow row wrap
+        align-content center
+        line-height 32px
+        font-size 14px
+        color #8d8d8d
+        .label
+          padding-right 4px
+        .mark-resolve
+          width 18px
+          height 32px
 
     .body
       .message
-        padding 10px 0 0 0
+        padding 10px 0 0 42px
+        line-height 22px
+        font-size 14px
+        color #515151
 
       .replies
-        padding 0 10px
         .reply
-          padding 20px 0 0 0
+          padding-top 20px
           .author
-            font-weight bold
+            padding-left 42px
+            font-family 'Lato Black', sans-serif
+            font-weight 900
+            font-size 14px
 
       .reply-form
-        padding 10px 0
+        padding 10px 10px 10px 42px
         .reply-input
           width 100%
           border-radius 4px
+          //border 1px solid #e2e2e2
           text-indent 5px
           line-height 14px
           padding 5px 0

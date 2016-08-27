@@ -41,8 +41,8 @@ export default class Comment extends Component {
           <div className="id">{comment.id}</div>
           <div className="author">{comment.author}</div>
           <div className="operation">
-            <label htmlFor="">Mark resolved</label>
-            <input type="checkbox" onClick={this._markResolved}/>
+            <label className="label">Mark resolved</label>
+            <input type="checkbox" className="mark-resolve" onClick={this._markResolved}/>
           </div>
         </div>
         <div className="body">
