@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Image from '../components/image'
 import Sidebar from '../components/sidebar'
 import Comments from '../components/comments'
-import '../style/app.styl'
+import '../theme/style/app.styl'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'

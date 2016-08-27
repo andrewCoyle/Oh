@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
-import '../style/image.styl'
+import '../theme/style/image.styl'
 
 export default class Image extends Component {
 

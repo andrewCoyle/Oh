@@ -35,14 +35,21 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel-loader'],
+        loaders: [
+          'react-hot',
+          'babel-loader',
+        ],
         exclude: /node_modules/,
         plugins: ['transform-runtime'],
       },
       {
         test: /\.styl$/,
         loader: 'style-loader!css-loader!stylus-loader'
-      }
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml'
+      },
     ]
   },
   postcss: function () {

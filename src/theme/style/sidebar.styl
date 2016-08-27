@@ -1,0 +1,82 @@
+.sidebar
+  display flex
+  flex-flow column wrap
+  flex 0 1 auto
+  width 25%
+  height 100%
+  border-left 1px solid #e2e2e2
+  overflow hidden
+  background-color #fff
+
+  &.minimized
+    width auto
+    .top-menu>*:not(.toggle),
+    .comment
+      display none
+
+  btn()
+    width 32px
+    height 32px
+    padding 0
+    background #fff
+    border-radius 4px
+    border 1px solid #e2e2e2
+  btn-img(width, height)
+    width width
+    height height
+    margin 0 auto
+    background-position center
+    background-size contain
+    background-repeat no-repeat
+
+  .top-menu
+    border-bottom 1px solid #e2e2e2
+    display flex
+    flex-row row wrap
+    justify-content space-between
+    .donut
+      width 44px
+      border-right 1px solid #e2e2e2
+      background-image url(../img/play.svg)
+    .image-name
+      line-height 46px
+      color #515151
+
+    .inner
+      display flex
+      flex-row row wrap
+      justify-content space-between
+      padding 7px
+
+      .share-wrapper
+        display flex
+        .share
+          btn()
+          width 57px
+          color #8d8d8d
+          border-right none
+          border-top-right-radius 0
+          border-bottom-right-radius 0
+        .share-context
+          btn()
+          width 24px
+          border-top-left-radius 0
+          border-bottom-left-radius 0
+          .arrow
+            btn-img(8px, 4px)
+            background-image url(../img/play.svg)
+            transform rotate(90deg)
+
+      .toggle
+        btn()
+        .arrow
+          btn-img(10px, 10px)
+          background-image url(../img/next.svg)
+          &.minimized
+            transform rotate(180deg)
+
+      .close
+        btn()
+        .cross
+          btn-img(10px, 10px)
+          background-image url(../img/cross.svg)

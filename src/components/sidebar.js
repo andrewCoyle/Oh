@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import '../style/sidebar.styl'
+import '../theme/style/sidebar.styl'
 
 export default class Sidebar extends Component {
 
@@ -26,12 +26,18 @@ export default class Sidebar extends Component {
       })}>
 
         <div className="top-menu">
-          <input type="text"/>
-          <select>
-            <option value="1">share</option>
-          </select>
-          <button className="minimize" onClick={this._toggleSidebar}>{isMinimized ? '<' : '>'}</button>
-          <button>{'X'}</button>
+          <div className="donut"></div>
+          <div className="image-name">Invoices.jpg</div>
+          <div className="inner">
+            <div className="share-wrapper">
+              <button className="share">Share</button>
+              <button className="share-context"><div className="arrow" /></button>
+            </div>
+            <button className="toggle" onClick={this._toggleSidebar}>
+              <div className={classnames('arrow', {minimized: isMinimized})}/>
+            </button>
+            <button className="close"><div className="cross"/></button>
+          </div>
         </div>
 
         {this.props.children}

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import Comment from './comment'
-import '../style/comments.styl'
+import '../theme/style/comments.styl'
 
 export default class Comments extends Component {
 
