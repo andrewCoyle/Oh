@@ -35,8 +35,10 @@ export default class Image extends Component {
     }
   }
 
-  _activateTag = () => {
-    this.props.activateTag()
+  _activateTag = (e) => {
+    console.log(e.target.id)
+    e.stopPropagation()
+    this.props.activateTag(e.target.id)
   }
 
   render() {
@@ -60,7 +62,9 @@ export default class Image extends Component {
     return (
       <div
         className={classnames('tag', {'active': tag.isActive})}
+        onClick={this._activateTag}
         key={tag.id}
+        id={tag.id}
         style={{
           left: tag.left,
           top: tag.top

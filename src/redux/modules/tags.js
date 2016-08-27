@@ -93,7 +93,7 @@ export default function reducer(state = initialState, action) {
     }
 
     case ACTIVATE_TAG: {
-      const index = state.findIndex((item) => item.get('id') === action.response.id)
+      const index = state.findIndex((item) => item.get('id') == action.response.id)
       return state.map((tag) => tag.setIn(['isActive'], false))
                   .update(index, (item) => item.set('isActive', true))
     }
