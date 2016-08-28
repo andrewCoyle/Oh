@@ -22,6 +22,7 @@ export default class Screen extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      background: '#f6f6f6'
     }
   }
 
@@ -36,16 +37,24 @@ export default class Screen extends Component {
   }
 
   _activateTag = (e) => {
-    console.log(e.target.id)
     e.stopPropagation()
     this.props.activateTag(e.target.id)
+  }
+
+  _changeBackground = (e) => {
+    this.setState({
+      background: e.target.dataset.color
+    })
   }
 
   render() {
     const { tags, fullscreen } = this.props
 
     return (
-      <div className={classnames('screen', {fullscreen: this.props.fullscreen})}>
+      <div
+        className={classnames('screen', {fullscreen: this.props.fullscreen})}
+        style={{backgroundColor: this.state.background}}
+      >
         <div className="image" onClick={this._createTag}>
           image
 
@@ -55,11 +64,11 @@ export default class Screen extends Component {
 
         </div>
         <div className="background-widget">
-          <div className="control white" value="#fff"/>
-          <div className="control white-two" value="#f6f6f6"/>
-          <div className="control greyish" value="#b2b2b2"/>
-          <div className="control greyish-brown" value="#515151"/>
-          <div className="control black" value="#000"/>
+          <div className="control white" data-color="#fff" onClick={this._changeBackground}/>
+          <div className="control white-two" data-color="#f6f6f6" onClick={this._changeBackground}/>
+          <div className="control greyish" data-color="#b2b2b2" onClick={this._changeBackground}/>
+          <div className="control greyish-brown" data-color="#515151" onClick={this._changeBackground}/>
+          <div className="control black" data-color="#000" onClick={this._changeBackground}/>
         </div>
         <div className="zoom-widget">
           <button className="control zoom-out">
