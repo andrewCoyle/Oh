@@ -54,23 +54,21 @@ export default class Screen extends Component {
           )}
 
         </div>
-        <div className="control-panel">
-          <div className="background-control">
-            <div className="control white" value="#fff"/>
-            <div className="control white-two" value="#f6f6f6"/>
-            <div className="control greyish" value="#b2b2b2"/>
-            <div className="control greyish-brown" value="#515151"/>
-            <div className="control black" value="#000"/>
-          </div>
-          <div className="size-control">
-            <button className="control zoom-out">
-              <div className="minus"/>
-            </button>
-            <button className="control fit">Fit</button>
-            <button className="control zoom-in">
-              <div className="plus"/>
-            </button>
-          </div>
+        <div className="background-widget">
+          <div className="control white" value="#fff"/>
+          <div className="control white-two" value="#f6f6f6"/>
+          <div className="control greyish" value="#b2b2b2"/>
+          <div className="control greyish-brown" value="#515151"/>
+          <div className="control black" value="#000"/>
+        </div>
+        <div className="zoom-widget">
+          <button className="control zoom-out">
+            <div className="minus"/>
+          </button>
+          <button className="control fit">Fit</button>
+          <button className="control zoom-in">
+            <div className="plus"/>
+          </button>
         </div>
       </div>
     )
