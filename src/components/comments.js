@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import CssTransitionGroup from 'react-addons-css-transition-group'
 import _ from 'lodash'
 import Comment from './comment'
 import '../theme/style/comments.styl'
@@ -28,13 +29,23 @@ export default class Comments extends Component {
       <div className="comments">
         {_.map(this.props.comments, (item) =>
           !item.isResolved &&
-            <Comment
+            <CssTransitionGroup
+              transitionName="example"
+              transitionEnterTimeout={3000}
+              transitionLeaveTimeout={3000}
+              transitionAppearTimeout={3000}
+              transitionAppear={true}
+              component="div"
               key={item.id}
-              comment={item}
-              resolveTag={this.props.resolveTag}
-              activateTag={this.props.activateTag}
-              replyToComment={this.props.replyToComment}
-            />
+            >
+              <Comment
+                key={item.id}
+                comment={item}
+                resolveTag={this.props.resolveTag}
+                activateTag={this.props.activateTag}
+                replyToComment={this.props.replyToComment}
+              />
+            </CssTransitionGroup>
         )}
       </div>
     )
