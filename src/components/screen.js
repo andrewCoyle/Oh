@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import classnames from 'classnames'
-import '../theme/style/image.styl'
+import '../theme/style/screen.styl'
 
-export default class Image extends Component {
+export default class Screen extends Component {
 
   static propTypes = {
     tags: PropTypes.array,
@@ -45,7 +45,7 @@ export default class Image extends Component {
     const { tags, fullscreen } = this.props
 
     return (
-      <div className={classnames('image-wrapper', {fullscreen: this.props.fullscreen})}>
+      <div className={classnames('screen', {fullscreen: this.props.fullscreen})}>
         <div className="image" onClick={this._createTag}>
           image
 
@@ -53,6 +53,24 @@ export default class Image extends Component {
             !tag.isResolved && this.renderTag(tag)
           )}
 
+        </div>
+        <div className="control-panel">
+          <div className="background-control">
+            <div className="control white" value="#fff"/>
+            <div className="control white-two" value="#f6f6f6"/>
+            <div className="control greyish" value="#b2b2b2"/>
+            <div className="control greyish-brown" value="#515151"/>
+            <div className="control black" value="#000"/>
+          </div>
+          <div className="size-control">
+            <button className="control zoom-out">
+              <div className="minus"/>
+            </button>
+            <button className="control fit">Fit</button>
+            <button className="control zoom-in">
+              <div className="plus"/>
+            </button>
+          </div>
         </div>
       </div>
     )

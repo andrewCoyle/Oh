@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Image from '../components/image'
+import Screen from '../components/screen'
 import Sidebar from '../components/sidebar'
 import Comments from '../components/comments'
 import '../theme/style/app.styl'
@@ -33,7 +33,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <Image
+        <Screen
           tags={tags}
           createTag={createTag}
           activateTag={activateTag}
