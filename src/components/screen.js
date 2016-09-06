@@ -8,14 +8,14 @@ export default class Screen extends Component {
   static propTypes = {
     tags: PropTypes.array,
     fullscreen: PropTypes.bool,
-    createTag: PropTypes.func,
+    prepareTag: PropTypes.func,
     activateTag: PropTypes.func
   }
 
   static defaultProps = {
     tags: [],
     fulscreen: false,
-    createTag: () => {},
+    prepareTag: () => {},
     activateTag: () => {}
   }
 
@@ -26,9 +26,9 @@ export default class Screen extends Component {
     }
   }
 
-  _createTag = (e) => {
+  _prepareTag = (e) => {
     if (!this.props.fullscreen) {
-      this.props.createTag({
+      this.props.prepareTag({
         id: this.props.tags.length + 1,
         left: e.pageX - 16,
         top: e.pageY - 16,
@@ -55,7 +55,7 @@ export default class Screen extends Component {
         className={classnames('screen', {fullscreen: this.props.fullscreen})}
         style={{backgroundColor: this.state.background}}
       >
-        <div className="image" onClick={this._createTag}>
+        <div className="image" onClick={this._prepareTag}>
           image
 
           {!fullscreen && _.map(tags, (tag) =>

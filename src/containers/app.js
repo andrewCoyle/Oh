@@ -6,7 +6,14 @@ import '../theme/style/app.styl'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getTags, createTag, resolveTag, activateTag, replyToComment } from '../redux/modules/tags'
+import {
+  getTags,
+  prepareTag,
+  createTag,
+  removeTag,
+  resolveTag,
+  activateTag,
+  replyToComment } from '../redux/modules/tags'
 
 class App extends Component {
 
@@ -29,13 +36,20 @@ class App extends Component {
 
   render() {
     const { tags } = this.props
-    const { createTag, resolveTag, activateTag, replyToComment } = this.props.tagsActions
+    const {
+      prepareTag,
+      createTag,
+      removeTag,
+      resolveTag,
+      activateTag,
+      replyToComment
+    } = this.props.tagsActions
 
     return (
       <div className="app">
         <Screen
           tags={tags}
-          createTag={createTag}
+          prepareTag={prepareTag}
           activateTag={activateTag}
           fullscreen={this.state.fullscreen}
         />
@@ -46,6 +60,8 @@ class App extends Component {
         >
           <Comments
             comments={tags}
+            createTag={createTag}
+            removeTag={removeTag}
             resolveTag={resolveTag}
             activateTag={activateTag}
             replyToComment={replyToComment}
@@ -64,7 +80,15 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    tagsActions: bindActionCreators({getTags, createTag, resolveTag, activateTag, replyToComment}, dispatch)
+    tagsActions: bindActionCreators({
+      getTags,
+      prepareTag,
+      createTag,
+      removeTag,
+      resolveTag,
+      activateTag,
+      replyToComment
+    }, dispatch)
   }
 }
 

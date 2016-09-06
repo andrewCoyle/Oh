@@ -6,6 +6,8 @@ export default class Comment extends Component {
 
   static propTypes = {
     comment: PropTypes.object,
+    createTag: PropTypes.func,
+    removeTag: PropTypes.func,
     resolveTag: PropTypes.func,
     activateTag: PropTypes.func,
     replyToComment: PropTypes.func
@@ -13,6 +15,8 @@ export default class Comment extends Component {
 
   static defaultProps = {
     comment: {},
+    createTag: () => {},
+    removeTag: () => {},
     resolveTag: () => {},
     activateTag: () => {},
     replyToComment: () => {}
@@ -39,9 +43,56 @@ export default class Comment extends Component {
     }
   }
 
+  _createComment = () => {
+    this.props.createTag(this.props.comment.id, this.refs.commentArea.value)
+  }
+
+  _cancelComment = () => {
+    this.props.removeTag(this.props.comment.id)
+  }
+
   render() {
     const { comment } = this.props
 
+    return (
+      comment.createdAt ? this.renderComment(comment) : this.renderCommentForm(comment)
+    )
+  }
+
+  renderCommentForm(comment) {
+    return (
+      <div className={classnames('comment', {active: comment.isActive})} onClick={this._activateTag}>
+        <div className="head">
+          <div className="id">{comment.id}</div>
+          <div className="author">{comment.author}</div>
+        </div>
+        <div className="body">
+          <div className="comment-form">
+            <textarea className="comment-area" cols="32" rows="6" ref="commentArea"/>
+            <button className="btn-add" onClick={this._createComment}>Add Comment</button>
+            <button className="btn-cancel" onClick={this._cancelComment}>Cancel</button>
+            <a href="#" className="invite">+ Invite others</a>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  renderReplyForm() {
+    return (
+      <div className="reply-form">
+        <input
+          className="reply-input"
+          type="text"
+          placeholder="Reply"
+          ref="replyInput"
+          onKeyDown={this._reply}
+        />
+      </div>
+    )
+  }
+
+  renderComment(comment) {
     return (
       <div className={classnames('comment', {active: comment.isActive})} onClick={this._activateTag}>
         <div className="head">
@@ -61,15 +112,7 @@ export default class Comment extends Component {
               this.renderReplies(reply)
             )}
           </div>
-          <div className="reply-form">
-            <input
-              className="reply-input"
-              type="text"
-              placeholder="Reply"
-              ref="replyInput"
-              onKeyDown={this._reply}
-            />
-          </div>
+          {this.renderReplyForm()}
         </div>
       </div>
     )

@@ -3,7 +3,9 @@ import Immutable from 'immutable'
 //action types
 const GET_TAGS_REQUEST = 'GET_TAGS_REQUEST'
 const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS'
+const PREPARE_TAG_REQUEST = 'PREPARE_TAG_REQUEST'
 const CREATE_TAG_REQUEST = 'CREATE_TAG_REQUEST'
+const REMOVE_TAG_REQUEST = 'REMOVE_TAG_REQUEST'
 const RESOLVE_TAG_REQUEST = 'RESOLVE_TAG_REQUEST'
 const ACTIVATE_TAG = 'ACTIVATE_TAG'
 const REPLY_COMMENT_TAG_REQUEST = 'REPLY_COMMENT_TAG_REQUEST'
@@ -22,19 +24,44 @@ export function getTags() {
   }
 }
 
-export function createTag(tag) {
+export function prepareTag(tag) {
   return (dispatch) => {
     dispatch({
-      type: CREATE_TAG_REQUEST,
+      type: PREPARE_TAG_REQUEST,
       response: {
         id: tag.id,
         left: tag.left,
         top: tag.top,
         author: 'Anonymous',
-        message: 'Default message.',
+        message: '',
         isResolved: false,
-        isActive: false,
-        replies: []
+        isActive: true,
+        replies: [],
+        createdAt: ''
+      }
+    })
+  }
+}
+
+export function createTag(id, message) {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_TAG_REQUEST,
+      response: {
+        id: id,
+        message: message,
+        createdAt: Date.now()
+      }
+    })
+  }
+}
+
+export function removeTag(id) {
+  return (dispatch) => {
+    dispatch({
+      type: REMOVE_TAG_REQUEST,
+      response: {
+        id: id
       }
     })
   }
@@ -79,13 +106,23 @@ export function replyToComment(id, message, author) {
 export default function reducer(state = initialState, action) {
   switch(action.type) {
     case GET_TAGS_REQUEST:
-      return state
+      return state.reverse()
 
     case GET_TAGS_SUCCESS:
       return state
 
-    case CREATE_TAG_REQUEST:
-      return state.push(Immutable.fromJS(action.response))
+    case PREPARE_TAG_REQUEST:
+      return state.unshift(Immutable.fromJS(action.response))
+
+    case CREATE_TAG_REQUEST: {
+      const index = state.findIndex((item) => item.get('id') == action.response.id)
+      return state.mergeIn([index], action.response)
+    }
+
+    case REMOVE_TAG_REQUEST: {
+      const index = state.findIndex((item) => item.get('id') == action.response.id)
+      return state.delete(index)
+    }
 
     case RESOLVE_TAG_REQUEST: {
       const index = state.findIndex((item) => item.get('id') === action.response.id)
