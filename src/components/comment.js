@@ -10,7 +10,8 @@ export default class Comment extends Component {
     removeTag: PropTypes.func,
     resolveTag: PropTypes.func,
     activateTag: PropTypes.func,
-    replyToComment: PropTypes.func
+    replyToComment: PropTypes.func,
+    setPreparingStatusOff: PropTypes.func,
   }
 
   static defaultProps = {
@@ -19,7 +20,8 @@ export default class Comment extends Component {
     removeTag: () => {},
     resolveTag: () => {},
     activateTag: () => {},
-    replyToComment: () => {}
+    replyToComment: () => {},
+    setPreparingStatusOff: () => {},
   }
 
   constructor(props) {
@@ -44,10 +46,12 @@ export default class Comment extends Component {
   }
 
   _createComment = () => {
+    this.props.setPreparingStatusOff()
     this.props.createTag(this.props.comment.id, this.refs.commentArea.value)
   }
 
   _cancelComment = () => {
+    this.props.setPreparingStatusOff()
     this.props.removeTag(this.props.comment.id)
   }
 

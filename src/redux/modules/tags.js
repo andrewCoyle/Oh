@@ -5,6 +5,7 @@ const GET_TAGS_REQUEST = 'GET_TAGS_REQUEST'
 const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS'
 const PREPARE_TAG_REQUEST = 'PREPARE_TAG_REQUEST'
 const CREATE_TAG_REQUEST = 'CREATE_TAG_REQUEST'
+const UPDATE_TAG_REQUEST = 'UPDATE_TAG_REQUEST'
 const REMOVE_TAG_REQUEST = 'REMOVE_TAG_REQUEST'
 const RESOLVE_TAG_REQUEST = 'RESOLVE_TAG_REQUEST'
 const ACTIVATE_TAG = 'ACTIVATE_TAG'
@@ -51,6 +52,25 @@ export function createTag(id, message) {
         id: id,
         message: message,
         createdAt: Date.now()
+      }
+    })
+  }
+}
+
+export function updateTag(tag) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_TAG_REQUEST,
+      response: {
+        id: tag.id,
+        left: tag.left,
+        top: tag.top,
+        author: 'Anonymous',
+        message: '',
+        isResolved: false,
+        isActive: true,
+        replies: [],
+        createdAt: ''
       }
     })
   }
@@ -115,6 +135,11 @@ export default function reducer(state = initialState, action) {
       return state.unshift(Immutable.fromJS(action.response))
 
     case CREATE_TAG_REQUEST: {
+      const index = state.findIndex((item) => item.get('id') == action.response.id)
+      return state.mergeIn([index], action.response)
+    }
+
+    case UPDATE_TAG_REQUEST: {
       const index = state.findIndex((item) => item.get('id') == action.response.id)
       return state.mergeIn([index], action.response)
     }

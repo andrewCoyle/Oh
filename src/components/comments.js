@@ -12,7 +12,8 @@ export default class Comments extends Component {
     removeTag: PropTypes.func,
     resolveTag: PropTypes.func,
     activateTag: PropTypes.func,
-    replyToComment: PropTypes.func
+    replyToComment: PropTypes.func,
+    setPreparingStatusOff: PropTypes.func,
   }
 
   static defaultProps = {
@@ -21,7 +22,8 @@ export default class Comments extends Component {
     removeTag: () => {},
     resolveTag: () => {},
     activateTag: () => {},
-    replyToComment: () => {}
+    replyToComment: () => {},
+    setPreparingStatusOff: () => {},
   }
 
   constructor(props) {
@@ -50,6 +52,7 @@ export default class Comments extends Component {
                 resolveTag={this.props.resolveTag}
                 activateTag={this.props.activateTag}
                 replyToComment={this.props.replyToComment}
+                setPreparingStatusOff={this.props.setPreparingStatusOff}
               />
             </CssTransitionGroup>
         )}

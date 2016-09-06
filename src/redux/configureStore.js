@@ -42,7 +42,10 @@ export default function configureStore() {
         ],
         createdAt: '25.01.2015'
       }
-    ])
+    ]),
+    settings: Immutable.fromJS({
+      statusPreparing: false
+    })
   }
 
   const store = createStore(

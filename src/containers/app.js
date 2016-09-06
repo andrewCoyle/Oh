@@ -6,14 +6,8 @@ import '../theme/style/app.styl'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {
-  getTags,
-  prepareTag,
-  createTag,
-  removeTag,
-  resolveTag,
-  activateTag,
-  replyToComment } from '../redux/modules/tags'
+import * as tagsActions from '../redux/modules/tags'
+import * as settingsActions from '../redux/modules/settings'
 
 class App extends Component {
 
@@ -35,23 +29,31 @@ class App extends Component {
   }
 
   render() {
-    const { tags } = this.props
+    const { tags, settings } = this.props
     const {
       prepareTag,
       createTag,
+      updateTag,
       removeTag,
       resolveTag,
       activateTag,
       replyToComment
     } = this.props.tagsActions
+    const {
+      setPreparingStatusOn,
+      setPreparingStatusOff
+    } = this.props.settingsActions
 
     return (
       <div className="app">
         <Screen
           tags={tags}
           prepareTag={prepareTag}
+          updateTag={updateTag}
           activateTag={activateTag}
           fullscreen={this.state.fullscreen}
+          statusPreparing={settings.statusPreparing}
+          setPreparingStatusOn={setPreparingStatusOn}
         />
 
         <Sidebar
@@ -65,6 +67,7 @@ class App extends Component {
             resolveTag={resolveTag}
             activateTag={activateTag}
             replyToComment={replyToComment}
+            setPreparingStatusOff={setPreparingStatusOff}
           />
         </Sidebar>
       </div>
@@ -74,21 +77,15 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    tags: state.tags.toJS()
+    tags: state.tags.toJS(),
+    settings: state.settings.toJS()
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    tagsActions: bindActionCreators({
-      getTags,
-      prepareTag,
-      createTag,
-      removeTag,
-      resolveTag,
-      activateTag,
-      replyToComment
-    }, dispatch)
+    tagsActions: bindActionCreators(tagsActions, dispatch),
+    settingsActions: bindActionCreators(settingsActions, dispatch)
   }
 }
 

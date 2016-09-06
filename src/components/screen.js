@@ -8,14 +8,20 @@ export default class Screen extends Component {
   static propTypes = {
     tags: PropTypes.array,
     fullscreen: PropTypes.bool,
+    statusPreparing: PropTypes.bool,
+    setPreparingStatusOn: PropTypes.func,
     prepareTag: PropTypes.func,
+    updateTag: PropTypes.func,
     activateTag: PropTypes.func
   }
 
   static defaultProps = {
     tags: [],
     fulscreen: false,
+    statusPreparing: false,
+    setPreparingStatusOn: () => {},
     prepareTag: () => {},
+    updateTag: () => {},
     activateTag: () => {}
   }
 
@@ -27,12 +33,22 @@ export default class Screen extends Component {
   }
 
   _prepareTag = (e) => {
+    console.log('!!!', this.props.statusPreparing)
     if (!this.props.fullscreen) {
-      this.props.prepareTag({
-        id: this.props.tags.length + 1,
-        left: e.pageX - 16,
-        top: e.pageY - 16,
-      })
+      if (this.props.statusPreparing) {
+        this.props.updateTag({
+          id: this.props.tags.length,
+          left: e.pageX - 16,
+          top: e.pageY - 16,
+        })
+      } else {
+        this.props.setPreparingStatusOn()
+        this.props.prepareTag({
+          id: this.props.tags.length + 1,
+          left: e.pageX - 16,
+          top: e.pageY - 16,
+        })
+      }
     }
   }
 
