@@ -104,7 +104,7 @@ export default class Comment extends Component {
           <div className="comment-form">
             <textarea
               className="comment-area"
-              cols="32" rows="6"
+              rows="6"
               ref={(area) => this.commentArea = area}
               onChange={this._onAreaChange}
             />
