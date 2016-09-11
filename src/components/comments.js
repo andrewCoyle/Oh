@@ -30,6 +30,10 @@ export default class Comments extends Component {
     super(props)
   }
 
+  componentDidMount() {
+    this.props.activateTag(this.props.comments.length)
+  }
+
   render() {
     return (
       <div className="comments">

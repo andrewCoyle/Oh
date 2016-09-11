@@ -132,7 +132,7 @@ export default function reducer(state = initialState, action) {
       return state
 
     case PREPARE_TAG_REQUEST:
-      return state.unshift(Immutable.fromJS(action.response))
+      return state.map((tag) => tag.setIn(['isActive'], false)).unshift(Immutable.fromJS(action.response))
 
     case CREATE_TAG_REQUEST: {
       const index = state.findIndex((item) => item.get('id') == action.response.id)
