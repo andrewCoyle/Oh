@@ -141,7 +141,7 @@ export default function reducer(state = initialState, action) {
 
     case UPDATE_TAG_REQUEST: {
       const index = state.findIndex((item) => item.get('id') == action.response.id)
-      return state.mergeIn([index], action.response)
+      return state.map((tag) => tag.setIn(['isActive'], false)).mergeIn([index], action.response)
     }
 
     case REMOVE_TAG_REQUEST: {

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 import _ from 'lodash'
 import classnames from 'classnames'
 
@@ -37,6 +38,9 @@ export default class Comment extends Component {
 
   componentDidUpdate() {
     this.areaFocusOn()
+    if (this.props.comment.isActive) {
+      ReactDOM.findDOMNode(this).scrollIntoView(true)
+    }
   }
 
   areaFocusOn() {
@@ -88,7 +92,10 @@ export default class Comment extends Component {
 
   renderCommentForm(comment) {
     return (
-      <div className={classnames('comment', {active: comment.isActive})} onClick={this._activateTag}>
+      <div
+        className={classnames('comment', {active: comment.isActive})}
+        onClick={this._activateTag}
+      >
         <div className="head">
           <div className="id">{comment.id}</div>
           <div className="author">{comment.author}</div>
