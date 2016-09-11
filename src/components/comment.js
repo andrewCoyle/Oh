@@ -27,6 +27,7 @@ export default class Comment extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isBtnDisabled: true
     }
   }
 
@@ -69,6 +70,14 @@ export default class Comment extends Component {
     this.props.removeTag(this.props.comment.id)
   }
 
+  _onAreaChange = (e) => {
+    if (e.target.value) {
+      this.setState({isBtnDisabled: false})
+    } else {
+      this.setState({isBtnDisabled: true})
+    }
+  }
+
   render() {
     const { comment } = this.props
 
@@ -86,8 +95,13 @@ export default class Comment extends Component {
         </div>
         <div className="body">
           <div className="comment-form">
-            <textarea className="comment-area" cols="32" rows="6" ref={(area) => this.commentArea = area}/>
-            <button className="btn-add" onClick={this._createComment}>Add Comment</button>
+            <textarea
+              className="comment-area"
+              cols="32" rows="6"
+              ref={(area) => this.commentArea = area}
+              onChange={this._onAreaChange}
+            />
+            <button className="btn-add" disabled={this.state.isBtnDisabled} onClick={this._createComment}>Add Comment</button>
             <button className="btn-cancel" onClick={this._cancelComment}>Cancel</button>
             <a href="#" className="invite">+ Invite others</a>
           </div>
