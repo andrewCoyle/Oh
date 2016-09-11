@@ -33,7 +33,6 @@ export default class Screen extends Component {
   }
 
   _prepareTag = (e) => {
-    console.log('!!!', this.props.statusPreparing)
     if (!this.props.fullscreen) {
       if (this.props.statusPreparing) {
         this.props.updateTag({

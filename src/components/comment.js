@@ -30,6 +30,20 @@ export default class Comment extends Component {
     }
   }
 
+  componentDidMount() {
+    this.areaFocusOn()
+  }
+
+  componentDidUpdate() {
+    this.areaFocusOn()
+  }
+
+  areaFocusOn() {
+    if (this.commentArea) {
+      this.commentArea.focus()
+    }
+  }
+
   _markResolved = () => {
     this.props.resolveTag(this.props.comment.id)
   }
@@ -47,7 +61,7 @@ export default class Comment extends Component {
 
   _createComment = () => {
     this.props.setPreparingStatusOff()
-    this.props.createTag(this.props.comment.id, this.refs.commentArea.value)
+    this.props.createTag(this.props.comment.id, this.commentArea.value)
   }
 
   _cancelComment = () => {
@@ -72,7 +86,7 @@ export default class Comment extends Component {
         </div>
         <div className="body">
           <div className="comment-form">
-            <textarea className="comment-area" cols="32" rows="6" ref="commentArea"/>
+            <textarea className="comment-area" cols="32" rows="6" ref={(area) => this.commentArea = area}/>
             <button className="btn-add" onClick={this._createComment}>Add Comment</button>
             <button className="btn-cancel" onClick={this._cancelComment}>Cancel</button>
             <a href="#" className="invite">+ Invite others</a>
