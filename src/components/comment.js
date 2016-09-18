@@ -57,10 +57,14 @@ export default class Comment extends Component {
     this.props.activateTag(this.props.comment.id)
   }
 
-  _reply = (e) => {
+  _reply = () => {
+    this.props.replyToComment(this.props.comment.id, this.refs.replyInput.value, 'Anonymous')
+    this.refs.replyInput.value = ''
+  }
+
+  _replyByEnter = (e) => {
     if (e.keyCode === 13 && e.target.value) {
-      this.props.replyToComment(this.props.comment.id, e.target.value, 'Anonymous')
-      this.refs.replyInput.value = ''
+      this._reply()
     }
   }
 
@@ -120,13 +124,18 @@ export default class Comment extends Component {
   renderReplyForm() {
     return (
       <div className="reply-form">
-        <input
-          className="reply-input"
+        <textarea
+          className="reply-area"
+          rows="1"
           type="text"
           placeholder="Reply"
           ref="replyInput"
-          onKeyDown={this._reply}
+          onChange={this._onAreaChange}
+          onKeyDown={this._replyByEnter}
         />
+        <button className="btn-add" disabled={this.state.isBtnDisabled} onClick={this._reply}>Reply</button>
+        <button className="btn-cancel">Cancel</button>
+        <a href="#" className="invite">+ Invite others</a>
       </div>
     )
   }
