@@ -102,6 +102,7 @@ export default class Screen extends Component {
     return (
       <div
         className={classnames('tag', {'active': tag.isActive})}
+        onClick={this._activateTag}
         onMouseEnter={this._activateTag}
         key={tag.id}
         id={tag.id}
