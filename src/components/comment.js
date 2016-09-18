@@ -37,7 +37,6 @@ export default class Comment extends Component {
   }
 
   componentDidUpdate() {
-    this.areaFocusOn()
     if (this.props.comment.isActive) {
       ReactDOM.findDOMNode(this).scrollIntoView(true)
     }
@@ -54,7 +53,9 @@ export default class Comment extends Component {
   }
 
   _activateTag = () => {
-    this.props.activateTag(this.props.comment.id)
+    if (!this.props.comment.isActive) {
+      this.props.activateTag(this.props.comment.id)
+    }
   }
 
   _reply = () => {
