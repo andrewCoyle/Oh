@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 import * as tagsActions from '../redux/modules/tags'
 import * as settingsActions from '../redux/modules/settings'
 
-class App extends Component {
+export class App extends Component {
 
   constructor(props) {
     super(props)
