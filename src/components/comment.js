@@ -59,8 +59,8 @@ export default class Comment extends Component {
   }
 
   _reply = () => {
-    this.props.replyToComment(this.props.comment.id, this.refs.replyInput.value, 'Anonymous')
-    this.refs.replyInput.value = ''
+    this.props.replyToComment(this.props.comment.id, this.refs.replyArea.value, 'Anonymous')
+    this.refs.replyArea.value = ''
   }
 
   _replyByEnter = (e) => {
@@ -77,6 +77,10 @@ export default class Comment extends Component {
   _cancelComment = () => {
     this.props.setPreparingStatusOff()
     this.props.removeTag(this.props.comment.id)
+  }
+  
+  _cancelReply = () => {
+    this.refs.replyArea.value = ''
   }
 
   _onAreaChange = (e) => {
@@ -130,12 +134,12 @@ export default class Comment extends Component {
           rows="1"
           type="text"
           placeholder="Reply"
-          ref="replyInput"
+          ref="replyArea"
           onChange={this._onAreaChange}
           onKeyDown={this._replyByEnter}
         />
         <button className="btn-add" disabled={this.state.isBtnDisabled} onClick={this._reply}>Reply</button>
-        <button className="btn-cancel">Cancel</button>
+        <button className="btn-cancel" onClick={this._cancelReply}>Cancel</button>
         <a href="#" className="invite">+ Invite others</a>
       </div>
     )
